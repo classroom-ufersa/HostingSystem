@@ -12,10 +12,25 @@ Este é um projeto de sistema de hospedagem em C para cadastrar hóspedes e mani
 
 ## Como usar
 
-1. Compile o código fonte com o comando `gcc main.c sistema.c quarto.c hospede.c -o sistema`.
-2. Execute o programa com o comando `./sistema`.
-3. Siga as instruções na tela para utilizar as funcionalidades do sistema.
+### Windows
+
+1. Abra o Prompt de Comando e navegue até o diretório onde o código fonte está localizado.
+2. Compile o código fonte com o comando `gcc main.c sistema.c quarto.c hospede.c -o sistema.exe`.
+3. Execute o programa com o comando `sistema.exe`.
+4. Siga as instruções na tela para utilizar as funcionalidades do sistema.
+
+### Linux
+
+1. Abra o Terminal e navegue até o diretório onde o código fonte está localizado.
+2. Compile o código fonte com o comando `gcc main.c sistema.c quarto.c hospede.c -o sistema`.
+3. Execute o programa com o comando `./sistema`.
+4. Siga as instruções na tela para utilizar as funcionalidades do sistema.
 
 ## Desenvolvimento
 
 Este projeto foi desenvolvido utilizando TADs (Tipos Abstratos de Dados) para representar os quartos e os hóspedes e para gerenciar o sistema de hospedagem como um todo.
+
+
+
+
+
