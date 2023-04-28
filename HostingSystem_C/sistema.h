@@ -1,16 +1,20 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
-#include "quarto.h"
-#include "hospede.h"
+//#include "quarto.h"
+//#include "hospede.h"
 
 typedef struct sistema Sistema;
+typedef struct hospede Hospede;
 
 // função para carregar os dados do arquivo de texto
-void carregar_dados(Sistema *sistema, char *arquivo);
+int carregar_dados(Sistema *sistema, char *arquivo);
 
 // função para atualizar o arquivo de texto com as alterações feitas no sistema
 void atualizar_arquivo(Sistema *sistema, char *arquivo);
+
+// função para criar e definir os quartos do hotel
+void inicializar_sistema(Sistema *sistema, int num_quartos);
 
 // função para adicionar uma nova reserva ao sistema
 void adicionar_reserva(Sistema *sistema, Hospede hospede);

@@ -12,13 +12,13 @@ PROJETO - Cadastrar hospedes e manipular quartos.
   - documento
   - quarto
 
-- MENU:
-  1- Realizar reserva
-  2- Excluir reserva
-  3- Listar reservas
-  4- Buscar reserva
-  5- Editar reserva
-  6- Consultar quartos disponiveis
-  7- Consultar quantitativo de hospedes
+- MENU: 🟢🟡🔴
+  1- Realizar reserva 🟡
+  2- Excluir reserva 🟢
+  3- Listar reservas 🟢
+  4- Buscar reserva 🟢
+  5- Editar reserva 🟢
+  6- Consultar quartos disponiveis 🟢
+  7- Consultar quantitativo de hospedes 🟢
   8- Sair
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "quarto.h"
 
-typedef struct quarto {
+struct quarto {
     int numero;
     int disponibilidade;
     float preco;
@@ -10,13 +10,38 @@ typedef struct quarto {
 };
 
 int verificar_disponibilidade(Quarto *quartos, int num_quartos, int numero) {
-    // função para verificar a disponibilidade de um quarto específico
+    for (int i = 0; i < num_quartos; i++) {
+        if (quartos[i].numero == numero) {
+            return quartos[i].disponibilidade;
+        }
+    }
+
+    return -1;
 }
 
 void alterar_preco(Quarto *quartos, int num_quartos, int numero, float novo_preco) {
-    // função para alterar o preço de um quarto específico
+    for (int i = 0; i < num_quartos; i++) {
+        if (quartos[i].numero == numero) {
+            quartos[i].preco = novo_preco;
+            break;
+        }
+    }
 }
 
 void listar_quartos_disponiveis(Quarto *quartos, int num_quartos) {
-    // função para listar todos os quartos disponíveis
+    int i;
+    for (i = 0; i < num_quartos; i++) {
+        if (quartos[i].disponibilidade == 1) {
+            printf("Numero: %d\nDisponivel: %d\nPreco: R$ %.2f\nLocal: %s\n", quartos[i].numero, quartos[i].disponibilidade, quartos[i].preco, quartos[i].localizacao);
+        }
+    }
+}
+
+int buscar_index_quarto(Quarto *quartos, int num_quarto, int num_quartos) {
+    int i;
+    for (i = 0; i < num_quartos; i++) {
+        if (quartos[i].numero == num_quarto) {
+            return i;
+        }
+    }
 }
