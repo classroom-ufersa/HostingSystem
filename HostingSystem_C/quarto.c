@@ -28,13 +28,15 @@ void alterar_preco(Quarto *quartos, int num_quartos, int numero, float novo_prec
     }
 }
 
-void listar_quartos_disponiveis(Quarto *quartos, int num_quartos) {
+int listar_quartos_disponiveis(Quarto *quartos, int num_quartos) {
     int i;
+    printf("- Lista de quartos disponiveis -\n");
     for (i = 0; i < num_quartos; i++) {
         if (quartos[i].disponibilidade == 1) {
-            printf("Numero: %d\nDisponivel: %d\nPreco: R$ %.2f\nLocal: %s\n", quartos[i].numero, quartos[i].disponibilidade, quartos[i].preco, quartos[i].localizacao);
+            printf("Numero: %d\nPreco: R$ %.2f\nLocal: %s\n", quartos[i].numero, quartos[i].preco, quartos[i].localizacao);
         }
     }
+    return i;
 }
 
 int buscar_index_quarto(Quarto *quartos, int num_quarto, int num_quartos) {

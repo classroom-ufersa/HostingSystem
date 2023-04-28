@@ -90,6 +90,11 @@ void inicializar_sistema(Sistema *sistema, int num_quartos) {
 }
 
 void adicionar_reserva(Sistema *sistema, Hospede hospede) {
+    if(sistema->num_hospedes >= sistema->num_quartos){
+        printf("[AVISO] Todos os quartos do hotel estao reservados!\n");
+        return;
+    }
+    
     int posicao_inserir = 0, i;
     while (posicao_inserir < sistema->num_hospedes && strcmp(sistema->hospedes[posicao_inserir].nome, hospede.nome) < 0) {
         posicao_inserir++;
@@ -129,7 +134,7 @@ void excluir_reserva(Sistema *sistema, char *documento) {
         }
         sistema->num_hospedes--;
         sistema->hospedes = (Hospede *) realloc(sistema->hospedes, sistema->num_hospedes * sizeof(Hospede));
-        sistema->quartos[qrt].disponibilidade = 0;
+        sistema->quartos[qrt].disponibilidade = 1;
         printf("Hospede excluido com sucesso!\n\n");
     } else printf("[AVISO] Processo ignorado.\n");
    
@@ -184,17 +189,7 @@ void editar_reserva(Sistema *sistema, char *documento) {
     scanf("%d", &sistema->hospedes[posicao_editar].quarto);
 }
 
-void consultar_quartos_disponiveis(Sistema *sistema) {
-    printf("- Lista de quartos disponiveis -\n");
-    for (int i = 0; i < sistema->num_quartos; i++) {
-        if (sistema->quartos[i].disponibilidade == 1) {
-            printf("Numero: %d\nPreco: R$ %.2f\nLocal: %s\n", sistema->quartos[i].numero, sistema->quartos[i].preco, sistema->quartos[i].localizacao);
-        }
-    }
-}
-
 int consultar_quantitativo_hospedes(Sistema *sistema) {
     return sistema->num_hospedes;
 }
-
 

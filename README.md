@@ -29,8 +29,3 @@ Este é um projeto de sistema de hospedagem em C para cadastrar hóspedes e mani
 ## Desenvolvimento
 
 Este projeto foi desenvolvido utilizando TADs (Tipos Abstratos de Dados) para representar os quartos e os hóspedes e para gerenciar o sistema de hospedagem como um todo.
-
-
-
-
-

@@ -31,10 +31,7 @@ Hospede buscar_reserva(Sistema *sistema, char *documento);
 // função para editar uma reserva existente no sistema
 void editar_reserva(Sistema *sistema, char *documento);
 
-// função para consultar os quartos disponíveis no sistema
-void consultar_quartos_disponiveis(Sistema *sistema);
-
-// função para consultar o quantitativo de hóspedes no sistema
+// função que retorna o quantitativo de hóspedes no sistema
 int consultar_quantitativo_hospedes(Sistema *sistema);
 
 #endif
