@@ -19,7 +19,7 @@ int main() {
         printf("8 - Sair\n");
         printf("Escolha uma opcao: ");
         //scanf("%d", &opcao);
-        opcao = scan_de_inteiros();
+        opcao = (int)scan_de_numeros();
 
         if (opcao == 1) {
             if(listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos) == 0){
@@ -27,16 +27,18 @@ int main() {
             } else {
                 Hospede hospede;
                 printf("Digite o numero do quarto desejado: ");
-                scanf("%d", &hospede.quarto);
-                break;
+                //scanf("%d", &hospede.quarto);
+                hospede.quarto = (int)scan_de_numeros();
                 while((verificar_disponibilidade(sistema.quartos, sistema.num_quartos, (int)hospede.quarto) != 1)){
                     printf("[AVISO] Digite o numero do quarto desejado dentre os disponiveis: ");
                     scanf("%d", &hospede.quarto);
                 }
                 printf("Digite o nome: ");
                 scanf(" %[^\n]", hospede.nome);
+                remover_caracteres_especiais(hospede.nome);
                 printf("Digite a duracao da estadia: ");
-                scanf("%d", &hospede.duracao_estadia);
+                hospede.duracao_estadia = (int)scan_de_numeros();
+                //scanf("%d", &hospede.duracao_estadia);
                 printf("Digite o documento: ");
                 scanf(" %[^\n]", hospede.documento);
                 sistema.quartos[buscar_index_quarto(sistema.quartos, hospede.quarto, sistema.num_quartos)].disponibilidade = 0;
