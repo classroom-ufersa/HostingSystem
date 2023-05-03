@@ -52,3 +52,4 @@ Mkfile.old
 dkms.conf
 HostingSystem_C/output/dados.txt
 .gitignore
+HostingSystem_C/output/main
