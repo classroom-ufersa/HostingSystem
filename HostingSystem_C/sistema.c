@@ -24,10 +24,10 @@ int carregar_dados(Sistema *sistema, char *arquivo) {
         printf("Erro ao abrir o arquivo %s\n", arquivo);
         return 0;
     }
-    int first_run = NULL;
+    int first_run = 0;
     fscanf(fp, "%d;%d\n", &sistema->num_quartos, &first_run);
     printf("fr: %d\n", first_run);
-    if(first_run == NULL){
+    if(first_run == 0){
         int new_nq = 0;
         printf("[AVISO] Primeira execucao do sistema ou arquivo de dados corrompido!\n");
         printf("Em caso de primeira execucao, digite o numero de quartos a cadastrar: ");

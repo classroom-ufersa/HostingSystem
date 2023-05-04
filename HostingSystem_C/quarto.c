@@ -46,4 +46,6 @@ int buscar_index_quarto(Quarto *quartos, int num_quarto, int num_quartos) {
             return i;
         }
     }
+    printf("[ERRO] Nao foi possivel achar o quarto %d", num_quarto);
+    return -1;
 }

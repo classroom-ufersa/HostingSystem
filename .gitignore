@@ -52,6 +52,10 @@ Mkfile.old
 dkms.conf
 HostingSystem_C/output/dados.txt
 .gitignore
+<<<<<<< HEAD
 
 #venv
 HostingSystem_python\venv
+=======
+HostingSystem_C/output/main
+>>>>>>> 072823cf5b235b4004d6b2b180e09b8c76b05387
