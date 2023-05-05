@@ -1,6 +1,7 @@
 #ifndef QUARTO_H
 #define QUARTO_H
 
+// tipo estruturado definido Quarto
 typedef struct quarto Quarto;
 
 // função para verificar a disponibilidade de um quarto específico

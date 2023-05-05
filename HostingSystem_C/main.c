@@ -22,9 +22,7 @@ int main() {
         opcao = (int)scan_de_numeros();
 
         if (opcao == 1) {
-            if(listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos) == 0){
-                printf("[AVISO] Sem quartos disponiveis.");
-            } else {
+            if(listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos) > 0){
                 Hospede hospede;
                 printf("Digite o numero do quarto desejado: ");
                 //scanf("%d", &hospede.quarto);
@@ -66,7 +64,7 @@ int main() {
 
             Hospede hospede = buscar_reserva(&sistema, documento);
             if (strlen(hospede.nome) > 0) {
-                printf("- Informacoes da reserva -\nNome: %s\nDuracao: %d dias\nDocumento: %s\nNo quarto: %d\n", hospede.nome, hospede.duracao_estadia, hospede.documento, hospede.quarto);
+                printf("- Informacoes da reserva -\nNome: %s\nDuracao: %d dia(s)\nDocumento: %s\nNo quarto: %d\n", hospede.nome, hospede.duracao_estadia, hospede.documento, hospede.quarto);
             } else {
                 printf("Reserva nao encontrada.\n");
             }

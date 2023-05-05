@@ -149,7 +149,7 @@ void listar_reservas(Sistema *sistema) {
     int i;
     printf("- Reservas cadastradas -");
     for (i = 0; i < sistema->num_hospedes; i++) {
-        printf("\nNome: %s\nDuracao: %d\nDocumento: %s\nNo quarto: %d\n", sistema->hospedes[i].nome, sistema->hospedes[i].duracao_estadia, sistema->hospedes[i].documento, sistema->hospedes[i].quarto);
+        printf("\nNome: %s\nDuracao: %d dia(s)\nDocumento: %s\nNo quarto: %d\n", sistema->hospedes[i].nome, sistema->hospedes[i].duracao_estadia, sistema->hospedes[i].documento, sistema->hospedes[i].quarto);
     }
 }
 
