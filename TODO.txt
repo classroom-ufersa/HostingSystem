@@ -18,10 +18,16 @@ PROJETO - Cadastrar hospedes e manipular quartos.
   2- Excluir reserva 🟢
   3- Listar reservas 🟢
   4- Buscar reserva 🟢
-  5- Editar reserva 🟢🟡
+  5- Editar reserva 🟡
+    🟡 Ordenar
+    🟡 Verificar disponibilidade
   6- Consultar quartos disponiveis
-      🟢 Exibir mensagem caso nao tenha quartos disponiveis.
-      🟢 Retornar quantitativo de quartos disponiveis.
+    🟢 Exibir mensagem caso nao tenha quartos disponiveis.
+    🟢 Retornar quantitativo de quartos disponiveis.
   7- Consultar quantitativo de hospedes 🟢
   8- Sair
+
+  - Extra
+  🟡 Salvar em maiusculo
+  🟡 Fazer com tipo estruturado de Lista
 
