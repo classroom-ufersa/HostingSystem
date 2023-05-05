@@ -1,3 +1,5 @@
+#ifndef UTILS_H
+#define UTILS_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,3 +42,5 @@ void remover_caracteres_especiais(char *str) {
   }
   str[ii] = '\0'; // Definindo final da string
 }
+
+#endif

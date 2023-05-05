@@ -10,7 +10,8 @@ struct quarto {
 };
 
 int verificar_disponibilidade(Quarto *quartos, int num_quartos, int numero) {
-    for (int i = 0; i < num_quartos; i++) {
+    int i;
+    for (i = 0; i < num_quartos; i++) {
         if (quartos[i].numero == numero) {
             return quartos[i].disponibilidade;
         }
