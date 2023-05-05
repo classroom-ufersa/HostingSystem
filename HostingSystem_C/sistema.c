@@ -191,15 +191,21 @@ void editar_reserva(Sistema *sistema, char *documento) {
     printf("- Documento atual: %s\nDigite o novo documento: ", sistema->hospedes[posicao_editar].documento);
     scanf(" %[^\n]", sistema->hospedes[posicao_editar].documento);
     int new_n;
-    do{
-        printf("- Quarto atual: %d\nDigite o numero do novo quarto: ", sistema->hospedes[posicao_editar].quarto);
+    printf("- Quarto atual: %d\nDigite o numero do novo quarto: ", sistema->hospedes[posicao_editar].quarto);
+    scanf("%d", &new_n);
+    if(new_n == sistema->hospedes[posicao_editar].quarto){
+        sistema->hospedes[posicao_editar].quarto = new_n;
+        printf("[AVISO] Reserva editada com sucesso!\n");
+        return;
+    }
+    while(verificar_disponibilidade(sistema->quartos, sistema->num_quartos, new_n) <= 0){
+        printf("Quarto indisponivel, digite o numero de um quarto disponivel\n");
+        listar_quartos_disponiveis(sistema->quartos, sistema->num_quartos);
+        printf("Escolha um quarto: ");
         scanf("%d", &new_n);
-        //new_n = (int)scan_de_numeros();
-        if(new_n == sistema->hospedes[posicao_editar].quarto){
-            break;
-        }
-    } while(verificar_disponibilidade(sistema->quartos, sistema->num_quartos, new_n) > 0);
+    }
     sistema->hospedes[posicao_editar].quarto = new_n;
+
     
 }
 
