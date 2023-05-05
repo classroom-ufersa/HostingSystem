@@ -1,11 +1,11 @@
 #criando o modelo de hospede
 
 class Hospede():
-    def __init__(self, nome, duracao_estadia, documento, quarto) -> None:
+    def __init__(self, nome, duracao_estadia, documento) -> None:
         self.nome = nome
         self.duracao_estadia = duracao_estadia
         self.documento = documento
-        self.quarto = quarto
+
 
         #definindo gets e sets
 
@@ -27,15 +27,10 @@ class Hospede():
         def setDocumento(self, documento):
             self.documento = documento
         
-        def getquarto(self):
-            return self.quarto
-        
-        def setQuarto(self,quarto):
-            self.quarto = quarto
 
         #encapsulando
         nome = property(fget=getNome, fset=setNome)
         duracao_estadia = property(fget=getDuracao_estadia, fset=setDuracao_estadia)
         documento = property(fget=getDocumento, fset=setDocumento)
-        quarto = property(fget=getquarto, fset=setQuarto)
+        
         
