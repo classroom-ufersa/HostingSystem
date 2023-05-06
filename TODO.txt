@@ -29,6 +29,6 @@ PROJETO - Cadastrar hospedes e manipular quartos.
 
   - Extra
   ✅ Salvar em maiusculo
-  ❌ Fazer com tipo estruturado de Lista
+  ✅ Fazer com tipo estruturado de Lista
   Tipagem
 
