@@ -20,53 +20,58 @@ int main() {
         printf("Escolha uma opcao: ");
         //scanf("%d", &opcao);
         opcao = (int)scan_de_numeros();
-
-        if (opcao == 1) {
-            if(listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos) > 0){
-                Hospede hospede = criar_hospede(&sistema);
-                adicionar_reserva(&sistema, hospede);
-                atualizar_arquivo(&sistema, "dados.txt");
-            }
-            
-        } else if (opcao == 2) {
-            if(sistema.num_hospedes == 0){
-                printf("[AVISO] Nao ha reservas, impossivel excluir!\n");
-            } else {
-                char documento[20];
+        char documento[20];
+        switch(opcao){
+            case 1:
+                if(listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos) > 0){
+                    Hospede hospede = criar_hospede(&sistema);
+                    adicionar_reserva(&sistema, hospede);
+                    atualizar_arquivo(&sistema, "dados.txt");
+                }
+                break;
+            case 2:
+                if(sistema.num_hospedes == 0){
+                    printf("[AVISO] Nao ha reservas, impossivel excluir!\n");
+                } else {
+                    //char documento[20];
+                    printf("Digite o documento: ");
+                    scanf(" %[^\n]", documento);
+                    excluir_reserva(&sistema, documento);
+                    atualizar_arquivo(&sistema, "dados.txt");
+                }
+                break;
+            case 3:
+                listar_reservas(&sistema);
+                break;
+            case 4:
+                //char documento[20];
                 printf("Digite o documento: ");
                 scanf(" %[^\n]", documento);
-                excluir_reserva(&sistema, documento);
-                atualizar_arquivo(&sistema, "dados.txt");
-            }
-            
-        } else if (opcao == 3) {
-            listar_reservas(&sistema);
-        } else if (opcao == 4) {
-            char documento[20];
-            printf("Digite o documento: ");
-            scanf(" %[^\n]", documento);
 
-            Hospede hospede = buscar_reserva(&sistema, documento);
-            if (strlen(hospede.nome) > 0) {
-                printf("- Informacoes da reserva -\nNome: %s\nDuracao: %d dia(s)\nDocumento: %s\nNo quarto: %d\n", hospede.nome, hospede.duracao_estadia, hospede.documento, hospede.quarto);
-            } else {
-                printf("Reserva nao encontrada.\n");
-            }
-        } else if (opcao == 5) {
-            char documento[20];
-            printf("Digite o documento: ");
-            scanf(" %[^\n]", documento);
-            if(editar_reserva(&sistema, documento)){
-                atualizar_arquivo(&sistema, "dados.txt");
-            }
-        } else if (opcao == 6) {
-            listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos);
-        } else if (opcao == 7) {
-            int quantitativo_hospedes = consultar_quantitativo_hospedes(&sistema);
-            printf("Quantitativo de hospedes: %d\n", quantitativo_hospedes);
-        } else if (opcao == 9) {
-            ordenar_hospedes(&sistema);
-            atualizar_arquivo(&sistema, "dados.txt");
+                Hospede hospede = buscar_reserva(&sistema, documento);
+                if (strlen(hospede.nome) > 0) {
+                    printf("- Informacoes da reserva -\nNome: %s\nDuracao: %d dia(s)\nDocumento: %s\nNo quarto: %d\n", hospede.nome, hospede.duracao_estadia, hospede.documento, hospede.quarto);
+                } else {
+                    printf("Reserva nao encontrada.\n");
+                }
+                break;
+            case 5:
+                //char documento[20];
+                printf("Digite o documento: ");
+                scanf(" %[^\n]", documento);
+                if(editar_reserva(&sistema, documento)){
+                    atualizar_arquivo(&sistema, "dados.txt");
+                }
+                break;
+            case 6:
+                listar_quartos_disponiveis(sistema.quartos, sistema.num_quartos);
+                break;
+            case 7:
+                //int quantitativo_hospedes = ;
+                printf("Quantitativo de hospedes: %d\n", consultar_quantitativo_hospedes(&sistema));
+                break;
+            default:
+                break;
         }
     } while (opcao != 8);
 

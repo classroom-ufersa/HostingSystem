@@ -14,7 +14,7 @@ float scan_de_numeros(void)
     //printf("'%s'\n", resto);
     size_t len = 0;
     float result;
-    printf("\nDigite somente numeros: ");
+    //printf("\nDigite somente numeros: ");
     while (1) {
        if (getline(&line, &len, stdin) == -1) {
            /* EOF or Error */
