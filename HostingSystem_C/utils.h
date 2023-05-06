@@ -10,20 +10,24 @@
 float scan_de_numeros(void)
 {
     char *line = NULL;
+    char resto[50] = "Codigo Verificador &*()";
+    //printf("'%s'\n", resto);
     size_t len = 0;
     float result;
+    printf("\nDigite somente numeros: ");
     while (1) {
        if (getline(&line, &len, stdin) == -1) {
            /* EOF or Error */
            return 1;
        }
-       if (sscanf(line, "%f", &result) != 1) {
+       if (sscanf(line, "%f%s", &result, resto) != 1) {
            printf("\nSomente numeros, por favor: ");
            continue; 
        } 
        break;
     }
-    //printf("Numero digitado: %d\n", result);
+    //printf("Numero digitado: %.2f\n", result);
+    //printf("Caracteres restantes: %s", resto);
     return result;
 }
 
