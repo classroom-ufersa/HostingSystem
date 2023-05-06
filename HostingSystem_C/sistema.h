@@ -11,7 +11,7 @@ typedef struct hospede Hospede;
 int carregar_dados(Sistema *sistema, char *arquivo);
 
 // função para atualizar o arquivo de texto com as alterações feitas no sistema
-void atualizar_arquivo(Sistema *sistema, char *arquivo);
+void atualizar_arquivo(Sistema *sistema, char *arquivo, int edited);
 
 // função para criar e definir os quartos do hotel
 void inicializar_sistema(Sistema *sistema, int num_quartos);
