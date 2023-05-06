@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "utils.h"
 #include "sistema.h"
+#include "quarto.c"
+
 //#define MAX_QUARTOS 10;
 
 struct sistema {
@@ -26,12 +26,12 @@ int carregar_dados(Sistema *sistema, char *arquivo) {
     }
     int first_run = 0;
     fscanf(fp, "%d;%d\n", &sistema->num_quartos, &first_run);
-    printf("fr: %d\n", first_run);
     if(first_run == 0){
         int new_nq = 0;
         printf("[AVISO] Primeira execucao do sistema ou arquivo de dados corrompido!\n");
         printf("Em caso de primeira execucao, digite o numero de quartos a cadastrar: ");
-        scanf("%d", &new_nq);
+        //scanf("%d", &new_nq);
+        new_nq = (int)scan_de_numeros();
         sistema->num_quartos = new_nq;
         return 2;
     };
@@ -59,6 +59,7 @@ void atualizar_arquivo(Sistema *sistema, char *arquivo) {
         printf("Erro ao abrir o arquivo %s\n", arquivo);
         return;
     }
+    ordenar_hospedes(sistema);
 
     fprintf(fp, "%d;%d\n", sistema->num_quartos, 1);
     for (i = 0; i < sistema->num_quartos; i++) {
@@ -84,22 +85,17 @@ void inicializar_sistema(Sistema *sistema, int num_quartos) {
     for (i = 0; i < num_quartos; i++){
         sistema->quartos[i].disponibilidade = 1;
         printf("Digite o numero do %do quarto a ser criado: ", i+1);
-        scanf("%d", &sistema->quartos[i].numero);
+        sistema->quartos[i].numero = (int)scan_de_numeros();
         printf("Digite a localizacao do %do quarto: ", i+1);
         scanf(" %[^\n]", sistema->quartos[i].localizacao);
         printf("Digite o preço da reserva do %do quarto: R$ ", i+1);
-        scanf("%f", &sistema->quartos[i].preco);
+        sistema->quartos[i].preco = scan_de_numeros();
         }
     sistema->num_hospedes = 0;
 
 }
 
 void adicionar_reserva(Sistema *sistema, Hospede hospede) {
-    if(sistema->num_hospedes >= sistema->num_quartos){
-        printf("[AVISO] Todos os quartos do hotel estao reservados!\n");
-        return;
-    }
-    
     int posicao_inserir = 0, i;
     while (posicao_inserir < sistema->num_hospedes && strcmp(sistema->hospedes[posicao_inserir].nome, hospede.nome) < 0) {
         posicao_inserir++;
@@ -164,13 +160,32 @@ Hospede buscar_reserva(Sistema *sistema, char *documento) {
             return sistema->hospedes[i];
         }
     }
-
     Hospede hospede_vazio;
     memset(&hospede_vazio, 0, sizeof(Hospede));
     return hospede_vazio;
 }
 
-void editar_reserva(Sistema *sistema, char *documento) {
+Hospede criar_hospede(Sistema *sistema){
+    Hospede hospede;
+    printf("Digite o numero do quarto desejado: ");
+    hospede.quarto = (int)scan_de_numeros();
+    while((verificar_disponibilidade(sistema->quartos, sistema->num_quartos, (int)hospede.quarto) != 1)){
+        printf("[AVISO] Digite o numero do quarto desejado dentre os disponiveis: ");
+        scanf("%d", &hospede.quarto);
+    }
+    printf("Digite o nome: ");
+    scanf(" %[^\n]", hospede.nome);
+    remover_caracteres_especiais(hospede.nome);
+    printf("Digite a duracao da estadia: ");
+    hospede.duracao_estadia = (int)scan_de_numeros();
+    //scanf("%d", &hospede.duracao_estadia);
+    printf("Digite o documento: ");
+    scanf(" %[^\n]", hospede.documento);
+    sistema->quartos[buscar_index_quarto(sistema->quartos, hospede.quarto, sistema->num_quartos)].disponibilidade = 0;
+    return hospede;
+}
+
+int editar_reserva(Sistema *sistema, char *documento) {
     int posicao_editar = -1, i;
     for (i = 0; i < sistema->num_hospedes; i++) {
         if (strcmp(sistema->hospedes[i].documento, documento) == 0) {
@@ -181,8 +196,9 @@ void editar_reserva(Sistema *sistema, char *documento) {
 
     if (posicao_editar == -1) {
         printf("Reserva não encontrada.\n");
-        return;
+        return -1;
     }
+    
     //adicionar_reserva
     printf("- Nome atual: %s\nDigite o novo nome: ", sistema->hospedes[posicao_editar].nome);
     scanf(" %[^\n]", sistema->hospedes[posicao_editar].nome);
@@ -193,23 +209,38 @@ void editar_reserva(Sistema *sistema, char *documento) {
     int new_n;
     printf("- Quarto atual: %d\nDigite o numero do novo quarto: ", sistema->hospedes[posicao_editar].quarto);
     scanf("%d", &new_n);
-    if(new_n == sistema->hospedes[posicao_editar].quarto){
-        sistema->hospedes[posicao_editar].quarto = new_n;
-        printf("[AVISO] Reserva editada com sucesso!\n");
-        return;
-    }
     while(verificar_disponibilidade(sistema->quartos, sistema->num_quartos, new_n) <= 0){
-        printf("Quarto indisponivel, digite o numero de um quarto disponivel\n");
+        if(new_n == sistema->hospedes[posicao_editar].quarto){
+            sistema->hospedes[posicao_editar].quarto = new_n;
+            printf("[AVISO] Reserva editada com sucesso!\n");
+            return 1;
+        }
+        printf("[AVISO] Quarto indisponivel, digite o numero de um quarto disponivel ou o numero do quarto atual.\n");
         listar_quartos_disponiveis(sistema->quartos, sistema->num_quartos);
         printf("Escolha um quarto: ");
         scanf("%d", &new_n);
     }
-    sistema->hospedes[posicao_editar].quarto = new_n;
-
     
+    sistema->quartos[buscar_index_quarto(sistema->quartos, sistema->hospedes[posicao_editar].quarto, sistema->num_quartos)].disponibilidade = 1;
+    sistema->hospedes[posicao_editar].quarto = new_n;
+    sistema->quartos[buscar_index_quarto(sistema->quartos, sistema->hospedes[posicao_editar].quarto, sistema->num_quartos)].disponibilidade = 0;
+    return 1;
 }
 
 int consultar_quantitativo_hospedes(Sistema *sistema) {
     return sistema->num_hospedes;
 }
 
+void ordenar_hospedes(Sistema *sistema) {
+    int i, j;
+    Hospede temp;
+    for (i = 0; i < sistema->num_hospedes - 1; i++) {
+        for (j = i + 1; j < sistema->num_hospedes; j++) {
+            if (strcmp(sistema->hospedes[i].nome, sistema->hospedes[j].nome) > 0) {
+                temp = sistema->hospedes[i];
+                sistema->hospedes[i] = sistema->hospedes[j];
+                sistema->hospedes[j] = temp;
+            }
+        }
+    }
+}

@@ -28,10 +28,16 @@ void listar_reservas(Sistema *sistema);
 // função para buscar uma reserva específica no sistema
 Hospede buscar_reserva(Sistema *sistema, char *documento);
 
+//função para criar um novo hospede
+Hospede criar_hospede(Sistema *sistema);
+
 // função para editar uma reserva existente no sistema
-void editar_reserva(Sistema *sistema, char *documento);
+int editar_reserva(Sistema *sistema, char *documento);
 
 // função que retorna o quantitativo de hóspedes no sistema
 int consultar_quantitativo_hospedes(Sistema *sistema);
+
+// função para ordenar os hospedes em ordem alfabetica
+void ordenar_hospedes(Sistema *sistema);
 
 #endif

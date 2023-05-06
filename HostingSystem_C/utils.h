@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "quarto.c"
-#include "sistema.c"
+
 
 //Pede um numero e verifica se o numero foi inserido corretamente
 float scan_de_numeros(void)
@@ -19,7 +18,7 @@ float scan_de_numeros(void)
            return 1;
        }
        if (sscanf(line, "%f", &result) != 1) {
-           printf("Somente numeros, por favor: ");
+           printf("\nSomente numeros, por favor: ");
            continue; 
        } 
        break;
