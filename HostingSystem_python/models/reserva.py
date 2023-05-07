@@ -1,6 +1,9 @@
 #criando a classe reserva
 
 class Reserva():
+    """
+    classe modelo para reservas
+    """
     def __init__(self, quarto, documento_hospede):
         self.quarto = quarto
         self.documento_hospede = documento_hospede

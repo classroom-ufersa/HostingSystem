@@ -1,6 +1,9 @@
 #criando o modelo de quarto
 
 class Quarto():
+    """
+    classe usada para modelos de quartos
+    """
     def __init__(self, numero, disponibilidade, preco, localizacao) -> None:
         self.numero = numero
         self.disponibilidade = disponibilidade

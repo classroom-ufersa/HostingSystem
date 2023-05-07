@@ -1,13 +1,15 @@
-#criando o modelo de hospede
+
 
 class Hospede():
+    """
+    classe usada de modelo de hospedes
+    """
     def __init__(self, nome, duracao_estadia, documento) -> None:
         self.nome = nome
         self.duracao_estadia = duracao_estadia
         self.documento = documento
 
 
-        #definindo gets e sets
 
         def getNome(self):
             return self.nome
@@ -28,7 +30,6 @@ class Hospede():
             self.documento = documento
         
 
-        #encapsulando
         nome = property(fget=getNome, fset=setNome)
         duracao_estadia = property(fget=getDuracao_estadia, fset=setDuracao_estadia)
         documento = property(fget=getDocumento, fset=setDocumento)
