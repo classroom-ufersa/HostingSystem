@@ -20,12 +20,19 @@ def main():
                 "8 - Sair\n")
                 
                 op = input('Escolha uma opção: ')
-                
-                op = int(op)
+                if type(op) != int:
+                    print("Digite apenas numeros!")
+                else:
+                    op = int(op)
+                    if op == 1:
+                        nome = input("Digite o seu nome")
+                        #esperar caueh
 
-                if op == 8:
-                    print('Saindo do sistema!')
-                    break
+
+
+                    elif op == 8:
+                        print('Saindo do sistema!')
+                        break
 
             except EOFError:
                 break
