@@ -1,4 +1,5 @@
 #include "sistema.c"
+#include "hospede.c"
 
 int main() {
     Sistema sistema;

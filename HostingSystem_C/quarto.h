@@ -13,6 +13,7 @@ void alterar_preco(Quarto *quartos, int num_quartos, int numero, float novo_prec
 // função para consultar os quartos disponíveis no sistema que retorna a quantidade
 int listar_quartos_disponiveis(Quarto *quartos, int num_quartos);
 
+// função que retorna o index de um dado quarto
 int buscar_index_quarto(Quarto *quartos, int num_quarto, int num_quartos);
 
 #endif

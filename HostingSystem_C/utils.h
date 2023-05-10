@@ -32,18 +32,14 @@ float scan_de_numeros(void)
 }
 
 void remover_caracteres_especiais(char *str) {
-  int i = 0, ii = 0;
-
-  // loop para percorrer toda a string
-  while (str[i] != '\0') {
-    if (isalpha(str[i])) {
-      // Salvando na propria string os valores que são somente caracteres 
-      str[ii] = str[i];
-      ++ii;
+    int i = 0, j = 0;
+    char c;
+    while ((c = str[i++]) != '\0') {
+        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == ' ') {
+            str[j++] = c;
+        }
     }
-    ++i;
-  }
-  str[ii] = '\0'; // Definindo final da string
+    str[j] = '\0';
 }
 
 #endif
