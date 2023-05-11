@@ -1,6 +1,7 @@
 #include "sistema.c"
 #include "hospede.c"
 
+
 int main() {
     Sistema sistema;
     if(carregar_dados(&sistema, "dados.txt") == 2){

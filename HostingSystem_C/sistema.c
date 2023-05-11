@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "utils.c"
 #include "sistema.h"
 #include "quarto.c"
 #include "hospede.h"
