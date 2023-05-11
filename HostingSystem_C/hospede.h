@@ -14,7 +14,6 @@ struct hospede {
     int quarto; 
     Hospede *proximo; 
 };
-
 //função para criar um novo hospede
 Hospede criar_hospede(Sistema *sistema);
 
