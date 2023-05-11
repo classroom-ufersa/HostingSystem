@@ -2,19 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#define TAM_MAX_LINHA 1024
 
 //Pede um numero e verifica se o numero foi inserido corretamente
 float scan_de_numeros(void)
 {
-    char *line = NULL;
+    char line[TAM_MAX_LINHA];
     char resto[50] = "Codigo Verificador &*()";
-    //printf("'%s'\n", resto);
-    size_t len = 0;
     float result;
-    //printf("\nDigite somente numeros: ");
     while (1) {
-       if (getline(&line, &len, stdin) == -1) {
+       if (fgets(line, TAM_MAX_LINHA, stdin) == NULL) {
            /* EOF or Error */
            return 1;
        }
@@ -24,8 +21,6 @@ float scan_de_numeros(void)
        } 
        break;
     }
-    //printf("Numero digitado: %.2f\n", result);
-    //printf("Caracteres restantes: %s", resto);
     return result;
 }
 
