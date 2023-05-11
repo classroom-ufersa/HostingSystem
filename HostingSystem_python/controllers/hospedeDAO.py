@@ -1,10 +1,11 @@
 from models.hospede import Hospede
-
+import sqlite3
 class HospedeDao():
     """
     classe usada para controlador de hospedes
     """
-    def __init__(self, hospede: Hospede) -> None:
+    def __init__(self) -> None:
+        self.db = sqlite3.connect("/Users/gusti/Documents/codigos/Trabalhos/host_system/HostingSystem_python/dbs/db.db")
         pass
 
     def cadastrar_hospede(self, hospede: Hospede):
@@ -13,20 +14,35 @@ class HospedeDao():
         args:
         hospede(Hospede): recebe um hospede
         """
-        cadastro = f"{hospede.nome};{hospede.duracao_estadia};{hospede.documento}\n"
-        db = open('HostingSystem_python/dbs/hospedes.txt','a')
-        db.write(cadastro) 
-        db.close() 
+        sql = """
+        insert into hospede
+        (nome,documento)
+        values
+        (?, ?);
+        """
+  
+        cursor = self.db.cursor()
+        cursor.execute(sql, (
+            hospede.nome,
+            hospede.documento
+        )
+        )
+        self.db.commit()
+
+        return cursor.lastrowid
     
     def listar_hospede(self): #arrumar direitinho depois 
         """
         funcao de listar hospedes
         """
-        db = open('HostingSystem_python/dbs/hospedes.txt','r') 
-        for i in db: 
-            i= i.replace(';','\t')
-            print(i)
-        db.close()
+        sql = """
+        select * from hospede;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
     
     def pesquisar_hospede(self, documento):
         """
@@ -35,9 +51,12 @@ class HospedeDao():
         Args:
             documento (int): identificador do hospede
         """
-        db = open('HostingSystem_python/dbs/hospedes.txt','r')
-        for i in db:
-            if i[2] == documento:
-                return(i)
-        return("Documento inválido/hospede não existente")
+        sql = """
+        select * from hospede
+        where documento = ?;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, (documento,))
+        return cursor.fetchone()
 

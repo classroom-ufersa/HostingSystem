@@ -1,10 +1,11 @@
 from models.reserva import Reserva
-
+import sqlite3
 class ReservaDAO():
     """
     classe usada como controlador de reservas
     """
-    def __init__(self, reserva: Reserva) -> None:
+    def __init__(self) -> None:
+        self.db = sqlite3.connect("/Users/gusti/Documents/codigos/Trabalhos/host_system/HostingSystem_python/dbs/db.db")
         pass
     
     def cadastrar_reserva(self, reserva: Reserva):
@@ -13,33 +14,95 @@ class ReservaDAO():
         Args:
             reserva (Reserva): um objeto do tipo reserva
         """
+        sql = """
+        insert into reserva
+        (quarto_hospede,documento_hospede,duracao_estadia)
+        values
+        (?, ?, ?);
+        """
+  
+        cursor = self.db.cursor()
+        cursor.execute(sql, (
+            reserva.quarto_hospedagem,
+            reserva.documento_hospede,
+            reserva.duracao_estadia
+        )
+        )
+        self.db.commit()
 
-        cadastro = f"{reserva.numero};{reserva.documento_hospede}\n" 
-        db = open('HostingSystem_python/dbs/reservas.txt','a') 
-        db.write(cadastro) 
-        db.close() 
+        return cursor.lastrowid
     
     def listar_reservas(self):
         """
         funcao para listar as reservas
         """    
-        db = open('HostingSystem_python/dbs/reservas.txt','a') 
-        for i in db: 
-            i= i.replace(';','\t')
-            print(i)
-        db.close()
+        sql = """
+        select * from reserva;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
     
-    def pesquisar_quarto(self, numero):
+    def pesquisar_reserva(self, numero):
         """
         funcao de pesquisa de reservas
 
         Args:
             numero (int): identificador do quarto
         """
-        db = open('HostingSystem_python/dbs/reservas.txt','r')
-        for i in db:
-            if i[0] == numero:
-                return(i)
-        return("reserva inválida/quarto não reservado/existente")
+        sql = """
+        select * from reserva
+        where quarto_hospede= ?;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, (numero,))
+        return cursor.fetchone()
 
 
+    def excluir_reserva(self, numero):
+        """
+        funcao de exclusao de reservas
+
+        Args:
+            numero (int): identificador do quarto
+        """
+        sql = """
+        delete from reserva
+        where quarto_hospede = ?;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, (numero))
+
+        self.db.commit()
+
+        return cursor.rowcount 
+    
+    def editar_reserva(self, numero,reserva: Reserva):
+        """
+        funcao de exclusao de reservas
+
+        Args:
+            numero (int): identificador do quarto
+        """
+        sql = """
+        update reserva
+        set quarto_hospede = ?, documento_hospede = ?, duracao_estadia = ?
+        where quarto_hospede = ?;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, (
+            reserva.quarto_hospedagem,
+            reserva.documento_hospede,
+            reserva.duracao_estadia,
+            numero
+            )
+        )
+
+        self.db.commit()
+
+        return cursor.rowcount
