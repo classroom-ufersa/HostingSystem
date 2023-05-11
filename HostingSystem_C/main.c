@@ -1,5 +1,5 @@
 #include "sistema.c"
-#include "hospede.c"
+//#include "hospede.c"
 
 
 int main() {

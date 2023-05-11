@@ -1,6 +1,7 @@
 #include "hospede.h"
 #include "sistema.h"
 
+
 struct hospede { 
     char nome[50]; 
     int duracao_estadia; 
