@@ -45,7 +45,8 @@ def main():
                                 print('Digite apenas valores numericos')
                             else:
                                 veri_quarto = quartodao.pesquisar_quarto(quarto_reserva)
-                                if int(veri_quarto[2] ) == 1 and veri_quarto!=None:
+                                
+                                if  veri_quarto!=None and int(veri_quarto[2] ) == 1:
                                     hospede = Hospede(nome = nome,documento= documento)
                                     hospededao.cadastrar_hospede(hospede=hospede)
                                     reserva = Reserva(quarto_hospedagem=quarto_reserva, documento_hospede=documento, duracao_estadia = estadia)
@@ -67,13 +68,13 @@ def main():
                         if reserva_excluida.isdigit() == True:
                         
                             veri_quarto_ex = quartodao.pesquisar_quarto(reserva_excluida)
-                            if veri_quarto_ex[2] == 0:
+                            if veri_quarto_ex!= None and veri_quarto_ex[2] == 0:
                                 reservadao.excluir_reserva(numero=reserva_excluida)
                                 quarto_editado = Quarto(numero = veri_quarto_ex[1], disponibilidade = 1,preco=veri_quarto_ex[3], localizacao=veri_quarto_ex[4])
                                 quartodao.editar_quarto(reserva_excluida,quarto_editado)
                                 print("Reserva excluida!")
                             else:
-                                print("Quarto já disponivel!")
+                                print("Quarto disponivel/inexistente!")
 
                         else:
                             print("Digite apenas valores numéricos! ")    
@@ -103,11 +104,6 @@ def main():
                             pesq_reserva = reservadao.pesquisar_reserva(quarto)
                             pesq_quarto = quartodao.pesquisar_quarto(quarto)
                             if pesq_quarto!=None:
-                                disp = quartodao.listar_quarto_disponivel()
-                                print('----Quartos disponiveis----')
-                                
-                                for i in disp:                   
-                                    print(f'Quarto {i[1]}, preço = {i[3]}R$')
                                 
                                 edit_quarto= input('Para qual quarto gostaria de mudar sua estadia: ')
                                 edit_tempo = input('Para quantos dias deseja alterar sua estadia: ')
@@ -118,7 +114,7 @@ def main():
                                     edit_tempo = int(edit_tempo)
                                     pesq_quarto2 = quartodao.pesquisar_quarto(edit_quarto)
                                     
-                                    if pesq_quarto2 != None and pesq_quarto2[2] == 1:
+                                    if pesq_reserva!=None and pesq_quarto2 != None and pesq_quarto2[2] == 1:
                                         reserva_edit= Reserva(documento_hospede = pesq_reserva[2], quarto_hospedagem=edit_quarto, duracao_estadia=edit_tempo)
                                         reservadao.editar_reserva(quarto,reserva_edit)
                                         print("Reserva editada com sucesso!")
@@ -141,7 +137,7 @@ def main():
                         for i in disp:                   
                             print(f'Quarto {i[1]}, preço = {i[3]}R$')
                     elif op == 7:
-                        qtd_hospedes =hospededao.listar_hospede()
+                        qtd_hospedes =reservadao.listar_reservas()
 
                         print('A quantidade de hospedes com reservas é:',len(qtd_hospedes))
 

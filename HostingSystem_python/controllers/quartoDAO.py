@@ -6,7 +6,7 @@ class QuartoDAO():
     classe usada de controlador para os quartos
     """
     def __init__(self) -> None:
-        self.db = sqlite3.connect("/Users/gusti/Documents/codigos/Trabalhos/host_system/HostingSystem_python/dbs/db.db")
+        self.db = sqlite3.connect("D:/Documents/UFERSA/cfiles/HostingSystem-1/HostingSystem_python/dbs/db.db")
         pass
     
     def cadastrar_quarto(self, quarto: Quarto):
@@ -77,7 +77,20 @@ class QuartoDAO():
         cursor.execute(sql)
 
         return cursor.fetchall()
-   
+    
+    def listar_quarto_indisponivel(self): 
+        """
+        funcao de listar quartos indisponiveis
+        """
+        sql = """
+        select * from quarto
+        where disponibilidade = 0 ;
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
     
     def editar_quarto(self, numero,quarto:Quarto):
         """
