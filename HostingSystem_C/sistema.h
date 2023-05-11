@@ -1,7 +1,7 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
-//#include "hospede.h"
+#include "hospede.h"
 
 // tipo estruturado Sistema
 typedef struct sistema Sistema;

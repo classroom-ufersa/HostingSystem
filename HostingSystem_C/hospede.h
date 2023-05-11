@@ -7,6 +7,14 @@ typedef struct sistema Sistema;
 // tipo estruturado Hospede
 typedef struct hospede Hospede;
 
+struct hospede { 
+    char nome[50]; 
+    int duracao_estadia; 
+    char documento[20]; 
+    int quarto; 
+    Hospede *proximo; 
+};
+
 //função para criar um novo hospede
 Hospede criar_hospede(Sistema *sistema);
 

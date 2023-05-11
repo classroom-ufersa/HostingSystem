@@ -1,7 +1,7 @@
 #include "utils.c"
 #include "sistema.h"
 #include "quarto.c"
-#include "hospede.c"
+#include "hospede.h"
 
 struct sistema {
     Quarto *quartos;
