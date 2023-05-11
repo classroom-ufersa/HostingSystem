@@ -29,7 +29,6 @@
 *.dylib
 
 # Executables
-*.exe
 *.out
 *.app
 *.i*86
@@ -51,7 +50,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 HostingSystem_C/output/dados.txt
-.gitignore
 <<<<<<< HEAD
 
 #venv

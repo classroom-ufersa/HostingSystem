@@ -1,6 +1,14 @@
 #include "hospede.h"
 #include "sistema.h"
 
+struct hospede { 
+    char nome[50]; 
+    int duracao_estadia; 
+    char documento[20]; 
+    int quarto; 
+    Hospede *proximo; 
+};
+
 Hospede criar_hospede(Sistema *sistema){
     Hospede hospede;
     printf("Digite o numero do quarto desejado: ");
