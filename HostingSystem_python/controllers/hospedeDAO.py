@@ -5,7 +5,7 @@ class HospedeDao():
     classe usada para controlador de hospedes
     """
     def __init__(self) -> None:
-        self.db = sqlite3.connect("D:/Documents/UFERSA/cfiles/HostingSystem-1/HostingSystem_python/dbs/db.db")
+        self.db = sqlite3.connect("HostingSystem_python\dbs\db.db")
         pass
 
     def cadastrar_hospede(self, hospede: Hospede):
