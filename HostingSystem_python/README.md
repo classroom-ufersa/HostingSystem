@@ -1,6 +1,6 @@
 # Sistema de Hospedagem
 
-Este é um projeto de sistema de hospedagem em C para cadastrar hóspedes e manipular quartos.
+Este é um projeto de sistema de hospedagem em python para cadastrar hóspedes e manipular quartos.
 
 ## Funcionalidades
 
